@@ -84,5 +84,41 @@ def fun2():
 
 
 
+import jieba.posseg as pseg
+'''
+分词并且标注词性
+'''
+def fun3():
+    words = pseg.cut('我爱自然语言')
+    for word,flag in words:
+        print('%s %s'%(word,flag))
+
+
+'''
+并行分词
+不确定win下是否能运行
+'''
+def fun4():
+    # 关闭
+    jieba.disable_parallel()
+    # 开启
+    jieba.enable_parallel(4)
+
+
+'''
+输入参数只接受unicode
+'''
+def fun5():
+    print("默认的tokenize")
+    result = jieba.tokenize(u"自然语言处理非常有用")
+    for tk in result:
+        print('%s\t\t atart: %d \t\t end:%d'%(tk[0],tk[1],tk[2]))
+
+    print("\n------------分割线-------------\n")
+    print("搜索模式的tokenize")
+    result = jieba.tokenize(u"自然语言处理非常有用",mode='search')
+    for tk in result:
+        print('%s\t\t atart: %d \t\t end:%d' % (tk[0], tk[1], tk[2]))
+
 if __name__ == '__main__':
-    fun2()
+    fun5()
